@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="Proyecto-Matricula-integrador" default="default" basedir=".">
-    <description>Builds, tests, and runs the project Proyecto-Matricula-integrador.</description>
+<project name="﻿PInscriptionSystems" default="default" basedir=".">
+    <description>Builds, tests, and runs the project ﻿PInscriptionSystems.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
