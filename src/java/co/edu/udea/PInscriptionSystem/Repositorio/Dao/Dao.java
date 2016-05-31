@@ -12,7 +12,7 @@ import java.sql.*;
  * @author PedroGallego
  */
 public class Dao {
-    public Connection conexion;
+    private Connection conexion;
     private final String userDb = "root";
     private final String passDb = "root";
 
@@ -25,5 +25,11 @@ public class Dao {
     public void desconectar() throws SQLException, ClassNotFoundException {
         conexion.close();
     }
+
+    public Connection getConexion() {
+        return conexion;
+    }
+    
+    
 
 }
