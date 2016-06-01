@@ -17,13 +17,13 @@ public interface InterfaceIdeaDao {
     
     public List<Idea> getOfertaSemestre (String semestre);
     
-    public Idea getIdeaByID ();
+    public Idea getIdeaByID (int id);
     
-    public List<Idea> getTotalLista ();
+    public List<Idea> getTotalIdeas ();
     
-    public int getNideas (String semestre);
+    public int getNroideas (String semestre);
     
-    public int getTotalIdeas ();
+    public int getNroTotalIdeas ();
     
     public List<Persona> getPostulantes (Statement s,int idIdea);
     

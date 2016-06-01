@@ -25,10 +25,11 @@ public class IdeaDao implements InterfaceIdeaDao {
         dao = new Dao();
     }
 
+    @Override
     public List<Idea> getOfertaSemestre(String semestre) {
         List<Idea> ideas = null;
         Idea idea;
-        int id, estudiantesxEquipo, disponibilidad, idavalador;
+        int id, estudiantesxEquipo, disponibilidad, idavalador, totalEquipos;
         String titulo, descripcion;
         Date fecha;
         List<Persona> postulante;
@@ -37,7 +38,7 @@ public class IdeaDao implements InterfaceIdeaDao {
             dao.conectar();
             Connection conexion = dao.getConexion();
             Statement s = conexion.createStatement();
-            ResultSet resIdeas = s.executeQuery("select Identificador, titulo, Descripcion, `Fecha creacion`, NroEstudiantesxEquipo, Disponibilidad, Persona_avalador_idPersona from Oferta_semestre inner join Idea   where (Semestre=" + semestre + ") and (identificador=Idea_identificador)");
+            ResultSet resIdeas = s.executeQuery("select Identificador, titulo, Descripcion, `Fecha creacion`, NroEstudiantesxEquipo, Disponibilidad, NroEquipos, Persona_avalador_idPersona from Oferta_semestre inner join Idea   where (Semestre=" + semestre + ") and (identificador=Idea_identificador)");
             do {
                 id = resIdeas.getInt(1);
                 titulo = resIdeas.getString(2);
@@ -45,10 +46,12 @@ public class IdeaDao implements InterfaceIdeaDao {
                 fecha = resIdeas.getDate(4);
                 estudiantesxEquipo = resIdeas.getInt(5);
                 disponibilidad = resIdeas.getInt(6);
-                idavalador = resIdeas.getInt(7);
+                idavalador = resIdeas.getInt(8);
                 postulante = this.getPostulantes(s, id);
                 avalador = this.getAvalador(s, idavalador);
-                idea = new Idea (id,titulo,descripcion,fecha,estudiantesxEquipo,disponibilidad, postulante, avalador);
+                totalEquipos = resIdeas.getInt(7);
+                idea = new Idea(id, titulo, descripcion, fecha, estudiantesxEquipo, disponibilidad, totalEquipos, postulante, avalador);
+                ideas.add(idea);
             } while (resIdeas.next());
         } catch (SQLException ex) {
             Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,39 +61,135 @@ public class IdeaDao implements InterfaceIdeaDao {
         return ideas;
     }
 
-    public Persona getAvalador (Statement s, int idavalador) {
+    @Override
+    public Persona getAvalador(Statement s, int idavalador) {
         try {
             ResultSet resAvalador = s.executeQuery("select Nombre, Correo from `Persona` where idPersona=" + idavalador);
-            return new Persona (idavalador, resAvalador.getString(1), resAvalador.getString(2));
+            return new Persona(idavalador, resAvalador.getString(1), resAvalador.getString(2));
         } catch (SQLException ex) {
             Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
-    
+
+    @Override
     public List<Persona> getPostulantes(Statement s, int idIdea) {
         List<Persona> postulantes = null;
         Persona es = null;
         try {
             ResultSet resPostulante = s.executeQuery("select idPersona, Nombre, Correo, rol, Tipo, Representante_idPersona from Idea inner join Postulante_has_Idea on Idea_Identificador=identificador inner join Persona on Persona_idPersona=idPersona where identificador=" + idIdea);
             do {
-                if (resPostulante.getString(4).equals("profesor"))
+                if (resPostulante.getString(4).equals("profesor")) {
                     es = new Estudiante(resPostulante.getInt(1), resPostulante.getString(2), resPostulante.getString(3));
-                else
-                    if (resPostulante.getString(4).equals("estudiante"))
-                        es = new Profesor(resPostulante.getInt(1), resPostulante.getString(2), resPostulante.getString(3));
-                    else
-                        if("juridica".equals(resPostulante.getString(5))) {
-                            es = new Juridica (resPostulante.getInt(1), resPostulante.getString(2), resPostulante.getString(3));
-                            int idRepresentante = resPostulante.getInt(6);
-                            ResultSet resRepresentante = s.executeQuery("select Nombre, Correo from `Persona` where idPersona="+idRepresentante);
-                            ((Juridica) es).setRepresentante(new Persona (idRepresentante,resRepresentante.getString(1),resRepresentante.getString(2)));
-                        }
-                if (es != null) postulantes.add(es);
+                } else if (resPostulante.getString(4).equals("estudiante")) {
+                    es = new Profesor(resPostulante.getInt(1), resPostulante.getString(2), resPostulante.getString(3));
+                } else if ("juridica".equals(resPostulante.getString(5))) {
+                    es = new Juridica(resPostulante.getInt(1), resPostulante.getString(2), resPostulante.getString(3));
+                    int idRepresentante = resPostulante.getInt(6);
+                    ResultSet resRepresentante = s.executeQuery("select Nombre, Correo from `Persona` where idPersona=" + idRepresentante);
+                    ((Juridica) es).setRepresentante(new Persona(idRepresentante, resRepresentante.getString(1), resRepresentante.getString(2)));
+                }
+                if (es != null) {
+                    postulantes.add(es);
+                }
             } while (resPostulante.next());
         } catch (SQLException ex) {
             Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return postulantes;
+    }
+
+    @Override
+    public Idea getIdeaByID(int id) {
+        Idea idea = null;
+        try {
+            dao.conectar();
+            Connection conexion = dao.getConexion();
+            Statement s = conexion.createStatement();
+            ResultSet resIdeas = s.executeQuery("select Identificador, titulo, Descripcion, `Fecha creacion`, NroEstudiantesxEquipo, Persona_avalador_idPersona from Idea where Identificador=" + id);
+            id = resIdeas.getInt(1);
+            String titulo = resIdeas.getString(2);
+            String descripcion = resIdeas.getString(3);
+            Date fecha = resIdeas.getDate(4);
+            int estudiantesxEquipo = resIdeas.getInt(5);
+            int disponibilidad = resIdeas.getInt(6);
+            int idavalador = resIdeas.getInt(8);
+            List<Persona> postulante = this.getPostulantes(s, id);
+            Persona avalador = this.getAvalador(s, idavalador);
+            int totalEquipos = resIdeas.getInt(7);
+            idea = new Idea(id, titulo, descripcion, fecha, estudiantesxEquipo, disponibilidad, totalEquipos, postulante, avalador);
+        } catch (SQLException ex) {
+            Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idea;
+    }
+
+    @Override
+    public List<Idea> getTotalIdeas() {
+        List<Idea> ideas = null;
+        Idea idea;
+        int id, estudiantesxEquipo, disponibilidad, idavalador, totalEquipos;
+        String titulo, descripcion;
+        Date fecha;
+        List<Persona> postulante;
+        Persona avalador;
+        try {
+            dao.conectar();
+            Connection conexion = dao.getConexion();
+            Statement s = conexion.createStatement();
+            ResultSet resIdeas = s.executeQuery("select Identificador, titulo, Descripcion, `Fecha creacion`, NroEstudiantesxEquipo,NroEquipos, Persona_avalador_idPersona from Idea");
+            do {
+                id = resIdeas.getInt(1);
+                titulo = resIdeas.getString(2);
+                descripcion = resIdeas.getString(3);
+                fecha = resIdeas.getDate(4);
+                estudiantesxEquipo = resIdeas.getInt(5);
+                disponibilidad = resIdeas.getInt(6);
+                idavalador = resIdeas.getInt(8);
+                postulante = this.getPostulantes(s, id);
+                avalador = this.getAvalador(s, idavalador);
+                totalEquipos = resIdeas.getInt(7);
+                idea = new Idea(id, titulo, descripcion, fecha, estudiantesxEquipo, disponibilidad, totalEquipos, postulante, avalador);
+                ideas.add(idea);
+            } while (resIdeas.next());
+        } catch (SQLException ex) {
+            Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ideas;
+    }
+
+    @Override
+    public int getNroideas(String semestre) {
+        try {
+            dao.conectar();
+            Connection conexion = dao.getConexion();
+            Statement s = conexion.createStatement();
+            return s.executeQuery("select count(*) from Oferta_semestre inner join Idea   where (Semestre=" + semestre + ") and (identificador=Idea_identificador)").getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
+    @Override
+    public int getNroTotalIdeas() {
+        try {
+            dao.conectar();
+            Connection conexion = dao.getConexion();
+            Statement s = conexion.createStatement();
+            return s.executeQuery("select count(*) from Idea").getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 
 }

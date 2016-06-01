@@ -5,6 +5,7 @@
  */
 package co.edu.udea.PInscriptionSystem.Repositorio.Dto;
 
+import java.sql.*;
 import java.util.List;
 
 /**
@@ -12,19 +13,22 @@ import java.util.List;
  * @author PedroGallego
  */
 public class Idea {
-    private int identificador, nroEstudiantesxEquipo, disponibilidad;
+    private int identificador, nroEstudiantesxEquipo, disponibilidad, TotalEqupipos;
     private String titulo, descripcion;
     private Persona avalador;
     private List<Persona> postulante;
+    private Date fecha;
 
-    public Idea(int identificador, int nroEstudiantesxEquipo, int nroEquipos, String titulo, String descripcion, Persona avalador, List<Persona> postulante) {
+    public Idea(int identificador,String titulo, String descripcion,Date fecha, int nroEstudiantesxEquipo, int disponibilidad, int totalEquipos,List<Persona> postulante, Persona avalador) {
         this.identificador = identificador;
         this.nroEstudiantesxEquipo = nroEstudiantesxEquipo;
-        this.disponibilidad = nroEquipos;
+        this.disponibilidad = disponibilidad;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.avalador = avalador;
         this.postulante = postulante;
+        this.fecha = fecha;
+        this.TotalEqupipos = totalEquipos;
     }
     
     public Idea () {}
