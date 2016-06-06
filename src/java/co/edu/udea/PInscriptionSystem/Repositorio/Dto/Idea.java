@@ -13,13 +13,15 @@ import java.util.List;
  * @author PedroGallego
  */
 public class Idea {
+
     private int identificador, nroEstudiantesxEquipo, disponibilidad, TotalEqupipos;
     private String titulo, descripcion;
     private Persona avalador;
     private List<Persona> postulante;
     private Date fecha;
+    private Requisito requisitos;
 
-    public Idea(int identificador,String titulo, String descripcion,Date fecha, int nroEstudiantesxEquipo, int disponibilidad, int totalEquipos,List<Persona> postulante, Persona avalador) {
+    public Idea(int identificador, String titulo, String descripcion, Date fecha, int nroEstudiantesxEquipo, int disponibilidad, int totalEquipos, List<Persona> postulante, Persona avalador) {
         this.identificador = identificador;
         this.nroEstudiantesxEquipo = nroEstudiantesxEquipo;
         this.disponibilidad = disponibilidad;
@@ -30,8 +32,41 @@ public class Idea {
         this.fecha = fecha;
         this.TotalEqupipos = totalEquipos;
     }
-    
-    public Idea () {}
+
+    public int getDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void setDisponibilidad(int disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
+
+    public int getTotalEqupipos() {
+        return TotalEqupipos;
+    }
+
+    public void setTotalEqupipos(int TotalEqupipos) {
+        this.TotalEqupipos = TotalEqupipos;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Requisito getRequisitos() {
+        return requisitos;
+    }
+
+    public void setRequisitos(Requisito requisitos) {
+        this.requisitos = requisitos;
+    }
+
+    public Idea() {
+    }
 
     public int getIdentificador() {
         return identificador;
@@ -85,10 +120,8 @@ public class Idea {
         return postulante;
     }
 
-    public void setPostulante(List <Persona> postulante) {
+    public void setPostulante(List<Persona> postulante) {
         this.postulante = postulante;
     }
-    
-    
-    
+
 }

@@ -19,16 +19,9 @@ public interface InterfaceIdeaDao {
     
     public Idea getIdeaByID (int id);
     
-    public List<Idea> getTotalIdeas ();
+    public List<Persona> getPostulantes (Connection c,int idIdea);
     
-    public int getNroideas (String semestre);
+    public Persona getAvalador (Connection c,int idavalador);
     
-    public int getNroTotalIdeas ();
-    
-    public List<Persona> getPostulantes (Statement s,int idIdea);
-    
-    public Persona getAvalador (Statement s,int idavalador);
-    
-    
-    
+    public Requisito getRequisitos (Connection c, int idIdea);
 }
