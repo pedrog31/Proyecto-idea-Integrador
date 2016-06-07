@@ -163,56 +163,48 @@ public class IdeaDao implements InterfaceIdeaDao {
                     case 1:
                         if (a1 == null) {
                             a1 = new ArrayList();
-                            a1.add(resArea.getString(1));
                         }
                         a1.add(resRequisito.getString(1));
                         break;
                     case 2:
                         if (a2 == null) {
                             a2 = new ArrayList();
-                            a2.add(resArea.getString(2));
                         }
                         a2.add(resRequisito.getString(1));
                         break;
                     case 3:
                         if (a3 == null) {
                             a3 = new ArrayList();
-                            a3.add(resArea.getString(3));
                         }
                         a3.add(resRequisito.getString(1));
                         break;
                     case 4:
                         if (a4 == null) {
                             a4 = new ArrayList();
-                            a4.add(resArea.getString(4));
                         }
                         a4.add(resRequisito.getString(1));
                         break;
                     case 5:
                         if (a5 == null) {
                             a5 = new ArrayList();
-                            a5.add(resArea.getString(5));
                         }
                         a5.add(resRequisito.getString(1));
                         break;
                     case 6:
                         if (a6 == null) {
                             a6 = new ArrayList();
-                            a6.add(resArea.getString(6));
                         }
                         a6.add(resRequisito.getString(1));
                         break;
                     case 7:
                         if (a7 == null) {
                             a7 = new ArrayList();
-                            a7.add(resArea.getString(7));
                         }
                         a7.add(resRequisito.getString(1));
                         break;
                     case 8:
                         if (a8 == null) {
                             a8 = new ArrayList();
-                            a8.add(resArea.getString(8));
                         }
                         a8.add(resRequisito.getString(1));
                         break;

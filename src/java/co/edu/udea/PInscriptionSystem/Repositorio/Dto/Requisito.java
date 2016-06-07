@@ -12,7 +12,7 @@ import java.util.List;
  * @author PedroGallego
  */
 public class Requisito {
-    private List<String> areas, a1,a2,a3,a4,a5,a6,a7,a8;
+    private List<String> areas,a1,a2,a3,a4,a5,a6,a7,a8;
 
     public Requisito(List<String> areas) {
         this.areas = areas;

@@ -1,4 +1,8 @@
 
+<%@page import="co.edu.udea.PInscriptionSystem.Repositorio.Dto.Requisito"%>
+<%@page import="co.edu.udea.PInscriptionSystem.Repositorio.Dto.Idea"%>
+<%@page import="co.edu.udea.PInscriptionSystem.Repositorio.Dao.impl.IdeaDao"%>
+<%@page import="co.edu.udea.PInscriptionSystem.Repositorio.Dao.*"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -48,32 +52,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%/* 
+                    <%
                     InterfaceIdeaDao idao = new IdeaDao();
                     List<Idea> prueba = idao.getOfertaSemestre("20161");
-                    for(Idea id : prueba){*/
+                    for(Idea id : prueba){
                     %>
                     <tr>
                         <td>
-                            <!--
-                            <button class="accordion"><%//out.print(id.getTitulo());%></button>
+                            <button class="accordion"><%out.print(id.getTitulo());%></button>
                             <div class="panel">
-                                <p>Identificador: <%//out.print(id.getIdentificador());%></p>
+                                <p>Identificador: <%out.print(id.getIdentificador());%></p>
                                 
                                 <p>Descripción del problema:<br/> 
-                                   <%//out.print(id.getDescripcion());%>
+                                   <%out.print(id.getDescripcion());%>
                                 </p>
                                 
-                                <p>Número de integrantes: <%//out.print(id.getNroEstudiantesxEquipo());%></p>                 
-                                <p>Grupos disponibles: <%//out.print(id.getDisponibilidad());%></p>
-                                <p>Postulante: <//%out.print(id.getPostulante());%></p>
-                                <p>Profesor que avala: <%//out.print(id.getAvalador());%></p>
+                                <p>Número de integrantes: <%out.print(id.getNroEstudiantesxEquipo());%></p>                 
+                                <p>Grupos disponibles: <%out.print(id.getDisponibilidad());%></p>
+                                <p>Postulante: <%out.print(id.getPostulante());%></p>
+                                <p>Profesor que avala: <%out.print(id.getAvalador().getNombre()+"  "+id.getAvalador().getCorreo());%></p>
                                 <p>Requisitos:<br/>
-                                    <%//out.print(id.getRequisitos());%>
+                                    <%
+                                        Requisito r = id.getRequisitos();
+                                        out.print(r.getA1()+""+r.getA2()+r.getA3()+r.getA4()+r.getA5()+r.getA6()+r.getA7()+r.getA8());%>
                                 </p>   
-                            </div>-->
+                            </div>
                                     
-                            <button class="accordion">Section 1</button>
+                            <!--<button class="accordion">Section 1</button>
                             <div class="panel">
                               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                             </div>
@@ -86,7 +91,7 @@
                             <button class="accordion">Section 3</button>
                             <div class="panel">
                               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            </div>
+                            </div>-->
                                 
                             <script>
                             var acc = document.getElementsByClassName("accordion");
@@ -102,7 +107,7 @@
                             
                         </td>
                     </tr>  
-                    <% //}%> 
+                    <% }%> 
                 </tbody>
             </table>
             <br/>

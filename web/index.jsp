@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>href="login2.jsp">Iniciar sesión</h1>
+        <h1><a href="login2.jsp">Iniciar sesión</a></h1>
     </body>
 </html>
