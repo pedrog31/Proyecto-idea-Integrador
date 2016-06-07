@@ -1,9 +1,9 @@
 <%-- 
-    Document   : index
-    Created on : 23-may-2016, 9:06:19
-    Author     : PedroGallego
+    Document   : Inscripciones
+    Created on : 01-jun-2016, 0:44:58
+    Author     : Mario
 --%>
-<%@taglib prefix="t" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

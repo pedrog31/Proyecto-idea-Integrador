@@ -24,4 +24,6 @@ public interface InterfaceIdeaDao {
     public Persona getAvalador (Connection c,int idavalador);
     
     public Requisito getRequisitos (Connection c, int idIdea);
+    
+    public boolean guardarIdea (Idea d);
 }

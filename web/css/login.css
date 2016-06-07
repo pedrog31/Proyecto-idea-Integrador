@@ -1,0 +1,76 @@
+h1{
+	color: #000;
+        text-align: center;
+        font-size: 40px;
+}
+
+body{
+	font-size: 18px;
+	background: url(http://4.bp.blogspot.com/-AUvDadwah-8/U_3TV908t9I/AAAAAAAAHIQ/jozhGXJ9Qso/s1600/DSCN4669.JPG);	
+	background-size: 100%;
+	background-attachment: fixed;
+	color: #000;
+        background-repeat: no-repeat;
+}
+
+.main{
+    width:400px;
+    height: 450px;
+    border:2px solid gray;
+    border-radius: 15px;
+    padding:20px;
+    margin:20px;
+    background:#D2D2D2;
+    color:black;
+    position:relative;
+    top:0px;
+    bottom:0px;
+    left:20px;
+    right:0px;
+}
+
+a{
+    text-decoration: none;
+    background: #4A88F4;
+    display: inline-block;
+    text-align: center;
+    margin: 10px 10px;
+    padding: 7px 10px;
+    box-shadow: 1px 2px 0px #064FA4;
+    border-radius: 5px;
+    color: white;
+    font-size: 15px;
+    
+}
+
+input[type="submit"]{
+    background:#4A88F4;
+    font-size: 15px;
+    color:white;
+    border:none;
+    border-radius: 5px;
+    height: 30px;
+    box-shadow: 1px 2px 0px #064FA4;
+    margin: 10px 50px;
+}
+input[type="submit"]:hover{
+    background:#619BDE;
+    cursor:pointer;
+}
+
+a:hover{
+    background:#619BDE;
+    cursor:pointer;
+}
+
+input [type="checkbox"]{
+    margin-right: 50px;
+    color: aquamarine;
+}
+
+input[type="text"] {
+    width:100%;
+    padding:5px;
+    box-sizing:border-box;
+    border:2px solid gray;
+}

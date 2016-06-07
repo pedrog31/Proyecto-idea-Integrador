@@ -1,0 +1,70 @@
+h1{
+    text-align: center;
+    font-family: sans-serif, "Tahoma", "Geneva" ;
+    font-size: 40px;
+}
+
+body{
+    background: #5EA7FA;
+}
+
+div{
+    width:400px;
+    height: 100px;
+    border:2px blue;
+    border-radius: 15px;
+    padding:20px;
+    margin:20px;
+    background:#1065C6;
+    color:black;
+    position:relative;
+    top:0px;
+    bottom:0px;
+    left:20px;
+    right:0px;
+    text-align: left;
+}
+
+textArea{
+    width: 300px;
+    height: 100px;
+}
+
+input[type="submit"]{
+    background:#4A88F4;
+    font-size: 15px;
+    color:white;
+    border:none;
+    border-radius: 5px;
+    height: 30px;
+    box-shadow: 1px 2px 0px #064FA4;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 80px;
+
+}
+input[type="submit"]:hover{
+    background:#619BDE;
+    cursor:pointer;
+
+}
+input[type="submit"]:active{
+    box-shadow: none;
+}
+
+p{
+    font-size: 20px;
+    position:relative;
+    top:0px;
+    bottom:0px;
+    left:150px;
+    right:0px; 
+}
+
+form{
+    position:relative;
+    top:0px;
+    bottom:0px;
+    left:100px;
+    right:0px;
+}
