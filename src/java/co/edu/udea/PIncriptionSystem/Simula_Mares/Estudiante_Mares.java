@@ -9,7 +9,7 @@ package co.edu.udea.PIncriptionSystem.Simula_Mares;
  *
  * @author PedroGallego
  */
-public class Estudiante {
+public class Estudiante_Mares {
     private int creditos;
     private Historia ha;
     private String Usuario,contraseña,cedula,nombre;
