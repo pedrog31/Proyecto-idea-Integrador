@@ -9,9 +9,9 @@ package co.edu.udea.PInscriptionSystem.Repositorio.Dto;
  *
  * @author PedroGallego
  */
-public class Persona {
-    int idPersona;
-    String nombre,correo;
+public abstract class Persona {
+    private int idPersona;
+    private String nombre,correo;
 
     public Persona(int idPersona, String nombre, String correo) {
         this.idPersona = idPersona;
@@ -42,4 +42,9 @@ public class Persona {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+    
+    public abstract String getRol ();
+    
+    public abstract String getTipo ();
+    
 }

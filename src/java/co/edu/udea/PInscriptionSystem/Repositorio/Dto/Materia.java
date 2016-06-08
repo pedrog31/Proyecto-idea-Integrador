@@ -9,11 +9,12 @@ package co.edu.udea.PInscriptionSystem.Repositorio.Dto;
  *
  * @author PedroGallego
  */
-class Materia {
+public class Materia {
 
-    private String nombre, codigo;
+    private String nombre;
+    private int codigo;
 
-    public Materia(String nombre, String codigo) {
+    public Materia(String nombre, int codigo) {
         this.nombre = nombre;
         this.codigo = codigo;
     }
@@ -26,11 +27,11 @@ class Materia {
         this.nombre = nombre;
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 

@@ -9,9 +9,19 @@ package co.edu.udea.PInscriptionSystem.Repositorio.Dto;
  *
  * @author PedroGallego
  */
-public class Estudiante extends Persona{
-    public Estudiante(int idPersona, String nombre, String correo) {
+public class EstPost extends Persona{
+    public EstPost(int idPersona, String nombre, String correo) {
         super(idPersona, nombre, correo);
+    }
+
+    @Override
+    public String getRol() {
+        return "Estudiante";
+    }
+
+    @Override
+    public String getTipo() {
+        return "Natural";
     }
     
 }

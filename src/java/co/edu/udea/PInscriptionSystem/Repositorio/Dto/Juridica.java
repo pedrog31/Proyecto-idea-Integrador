@@ -10,17 +10,27 @@ package co.edu.udea.PInscriptionSystem.Repositorio.Dto;
  * @author PedroGallego
  */
 public class Juridica  extends Persona{
-    private Persona representante = null;
+    private Representante representante = null;
     
     public Juridica(int idPersona, String nombre, String correo) {
         super(idPersona, nombre, correo);
     }
 
-    public Persona getRepresentante() {
+    public Representante getRepresentante() {
         return representante;
     }
 
-    public void setRepresentante(Persona representante) {
+    public void setRepresentante(Representante representante) {
         this.representante = representante;
+    }
+
+    @Override
+    public String getRol() {
+        return null;
+    }
+
+    @Override
+    public String getTipo() {
+        return ((Integer)representante.getIdPersona()).toString();
     }
 }

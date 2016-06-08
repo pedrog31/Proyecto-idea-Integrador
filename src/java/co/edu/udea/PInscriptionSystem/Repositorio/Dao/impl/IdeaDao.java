@@ -26,6 +26,12 @@ public class IdeaDao implements InterfaceIdeaDao {
         dao = new Dao();
     }
 
+    /**
+     *
+     * @param sem Es el semestre del cual se obtendra la lista de ideas, null
+     * para enviar todas las ideas existentes
+     * @return Lista con ideas de proyecto del semestre enviado como parametro.
+     */
     @Override
     public List<Idea> getOfertaSemestre(String sem) {
         List<Idea> ideas = new ArrayList();
@@ -75,7 +81,7 @@ public class IdeaDao implements InterfaceIdeaDao {
             Statement s = c.createStatement();
             ResultSet resAvalador = s.executeQuery("select Nombre, Correo from `Persona` where idPersona=" + idavalador);
             resAvalador.next();
-            return new Persona(idavalador, resAvalador.getString(1), resAvalador.getString(2));
+            return new Profesor(idavalador, resAvalador.getString(1), resAvalador.getString(2));
         } catch (SQLException ex) {
             Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -93,12 +99,12 @@ public class IdeaDao implements InterfaceIdeaDao {
                 if (resPostulante.getString(4).equals("profesor")) {
                     es = new Profesor(resPostulante.getInt(1), resPostulante.getString(2), resPostulante.getString(3));
                 } else if (resPostulante.getString(4).equals("estudiante")) {
-                    es = new Estudiante(resPostulante.getInt(1), resPostulante.getString(2), resPostulante.getString(3));
+                    es = new EstPost(resPostulante.getInt(1), resPostulante.getString(2), resPostulante.getString(3));
                 } else if ("juridica".equals(resPostulante.getString(5))) {
                     es = new Juridica(resPostulante.getInt(1), resPostulante.getString(2), resPostulante.getString(3));
                     int idRepresentante = resPostulante.getInt(6);
                     ResultSet resRepresentante = s.executeQuery("select Nombre, Correo from `Persona` where idPersona=" + idRepresentante);
-                    ((Juridica) es).setRepresentante(new Persona(idRepresentante, resRepresentante.getString(1), resRepresentante.getString(2)));
+                    ((Juridica) es).setRepresentante(new Representante(idRepresentante, resRepresentante.getString(1), resRepresentante.getString(2)));
                 }
                 if (es != null) {
                     postulantes.add(es);
@@ -130,6 +136,7 @@ public class IdeaDao implements InterfaceIdeaDao {
             Persona avalador = this.getAvalador(conexion, idavalador);
             int totalEquipos = resIdeas.getInt(7);
             idea = new Idea(id, titulo, descripcion, fecha, estudiantesxEquipo, disponibilidad, totalEquipos, postulante, avalador);
+            idea.setRequisitos(this.getRequisitos(conexion, id));
         } catch (SQLException ex) {
             Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -154,70 +161,72 @@ public class IdeaDao implements InterfaceIdeaDao {
             int codMateria, codArea;
             String nombre;
             req = new Requisito(areas);
-            List<String> a1 = null, a2 = null, a3 = null, a4 = null, a5 = null, a6 = null, a7 = null, a8 = null;
+            List<Materia> a1 = null, a2 = null, a3 = null, a4 = null, a5 = null, a6 = null, a7 = null, a8 = null;
+            Materia mat;
             while (resRequisito.next()) {
                 codMateria = resRequisito.getInt(1);
                 nombre = resRequisito.getString(2);
                 codArea = resRequisito.getInt(3);
+                mat = new Materia(nombre, codMateria);
                 switch (codArea) {
                     case 1:
                         if (a1 == null) {
                             a1 = new ArrayList();
                         }
-                        a1.add(resRequisito.getString(1));
+                        a1.add(mat);
                         break;
                     case 2:
                         if (a2 == null) {
                             a2 = new ArrayList();
                         }
-                        a2.add(resRequisito.getString(1));
+                        a2.add(mat);
                         break;
                     case 3:
                         if (a3 == null) {
                             a3 = new ArrayList();
                         }
-                        a3.add(resRequisito.getString(1));
+                        a3.add(mat);
                         break;
                     case 4:
                         if (a4 == null) {
                             a4 = new ArrayList();
                         }
-                        a4.add(resRequisito.getString(1));
+                        a4.add(mat);
                         break;
                     case 5:
                         if (a5 == null) {
                             a5 = new ArrayList();
                         }
-                        a5.add(resRequisito.getString(1));
+                        a5.add(mat);
                         break;
                     case 6:
                         if (a6 == null) {
                             a6 = new ArrayList();
                         }
-                        a6.add(resRequisito.getString(1));
+                        a6.add(mat);
                         break;
                     case 7:
                         if (a7 == null) {
                             a7 = new ArrayList();
                         }
-                        a7.add(resRequisito.getString(1));
+                        a7.add(mat);
                         break;
                     case 8:
                         if (a8 == null) {
                             a8 = new ArrayList();
                         }
-                        a8.add(resRequisito.getString(1));
+                        a8.add(mat);
                         break;
                 }
-                req.setA1(a1);
-                req.setA2(a2);
-                req.setA3(a3);
-                req.setA4(a4);
-                req.setA5(a5);
-                req.setA6(a6);
-                req.setA7(a7);
-                req.setA8(a8);
             }
+            req.setA1(a1);
+            req.setA2(a2);
+            req.setA3(a3);
+            req.setA4(a4);
+            req.setA5(a5);
+            req.setA6(a6);
+            req.setA7(a7);
+            req.setA8(a8);
         } catch (SQLException ex) {
             Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -225,23 +234,61 @@ public class IdeaDao implements InterfaceIdeaDao {
     }
 
     @Override
-    public boolean guardarIdea(Idea d) {
-        int id = d.getIdentificador(),estudiantesxEquipo = d.getNroEstudiantesxEquipo();
-        int disponibilidad = d.getDisponibilidad();
-        String titulo = d.getTitulo(),descripcion = d.getDescripcion();
+    public boolean guardarIdea(Idea d, String semestre) {
+        int id = d.getIdentificador(), estudiantesxEquipo = d.getNroEstudiantesxEquipo();
+        int disponibilidad = d.getDisponibilidad(), totalEquipos = d.getNroEquipos();
+        String titulo = d.getTitulo(), descripcion = d.getDescripcion(), sql;
         Persona avalador = d.getAvalador();
-        List <Persona> postulante = d.getPostulante();
-        Date fecha = d.getFecha();
-        Requisito requisitos = d.getRequisitos();
+        List<Persona> postulante = d.getPostulante();
+        String fecha = d.getFecha().toString();
+        List<String> requisitos = d.getRequisitos().getAllCodigosRequisitos();
         try {
             dao.conectar();
             Connection conexion = dao.getConexion();
             Statement s = conexion.createStatement();
-            ResultSet resultado = s.executeQuery("INSERT INTO `Idea` (`Identificador`, `titulo`, `Descripcion`, `Fecha_creacion`, `NroEstudiantesxEquipo`, `NroEquipos`, `Persona_avalador_idPersona`)VALUES (31,'sdkm',msks,\"2016-05-31\",3,1,1)");
-            System.out.println(resultado);
+            this.guardarNuevaPersona(conexion, avalador);
+            for (Persona post : postulante) {
+                this.guardarNuevaPersona(conexion, post);
+                sql = "INSERT INTO `Postulante_has_Idea` (`Persona_idPersona`, `Idea_Identificador`) VALUES (" + post.getIdPersona() + "," + id + ")";
+                s.executeUpdate(sql);
+            }
+            sql = "INSERT INTO `Idea` (`Identificador`, `titulo`, `Descripcion`, `Fecha_creacion`, `NroEstudiantesxEquipo`, `NroEquipos`, `Persona_avalador_idPersona`)VALUES (" + id + ",\"" + titulo + "\",\"" + descripcion + "\",\"" + fecha + "\"," + estudiantesxEquipo + "," + totalEquipos + "," + avalador.getIdPersona() + ")";
+            s.executeUpdate(sql);
+            sql = "INSERT INTO `Oferta_semestre` (`Idea_Identificador`, `Semestre`, `Disponibilidad`)VALUES (" + id + "," + semestre + "," + disponibilidad + ")";
+            s.executeUpdate(sql);
+            for (String requisito : requisitos) {
+                sql = "INSERT INTO `Prerequisito` (`Idea_Identificador`, `Codigo_Materia`)VALUES (" + id + "," + requisito + ")";
+                s.executeUpdate(sql);
+            }
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+
+    }
+
+    @Override
+    public boolean guardarNuevaPersona(Connection c, Persona p) {
+        try {
+            Statement s = c.createStatement();
+            String nombre = p.getNombre(), correo = p.getCorreo(), rol = p.getRol(), tipo = p.getTipo();
+            int id = p.getIdPersona(), idRepresentante;
+            String sql=null;
+            try {
+                idRepresentante = Integer.parseInt(tipo);
+                guardarNuevaPersona(c, ((Juridica) p).getRepresentante());
+                sql = "INSERT INTO `Persona` (`idPersona`, `Nombre`, `Correo`, `Rol`, `Tipo`, `Representante_idPersona`) VALUES (" + id + ",`" + nombre + "`,`" + correo + "`,`" + rol + "`," + "`Juridica`," + idRepresentante + ")";
+            } catch (Exception e) {
+                sql = "INSERT INTO `Persona` (`idPersona`, `Nombre`, `Correo`, `Rol`, `Tipo`, `Representante_idPersona`) VALUES (" + id + ",`" + nombre + "`,`" + correo + "`,`" + rol + "`,`" + tipo + "`,null)";
+            } finally {
+                s.executeUpdate(sql);
+            }
+
+        } catch (SQLException ex) {
             Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;

@@ -9,20 +9,18 @@ package co.edu.udea.PInscriptionSystem.Repositorio.Dto;
  *
  * @author PedroGallego
  */
-public class Profesor extends Persona {
-    
-    public Profesor(int idPersona, String nombre, String correo) {
+public class Representante extends Persona{
+        public Representante (int idPersona, String nombre, String correo) {
         super(idPersona, nombre, correo);
     }
 
     @Override
     public String getRol() {
-        return "Profesor";
+        return "Representante";
     }
 
     @Override
     public String getTipo() {
         return "natural";
     }
-    
 }
