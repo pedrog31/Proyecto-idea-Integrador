@@ -138,4 +138,19 @@ public class Requisito {
         return codigos;
     }
 
+    public List<List> getListasDeRequisitos() {
+        List<List> salida = new ArrayList<List>();
+        
+        salida.add(this.a1);
+        salida.add(this.a2);
+        salida.add(this.a3);
+        salida.add(this.a4);
+        salida.add(this.a5);
+        salida.add(this.a6);
+        salida.add(this.a7);
+        salida.add(this.a8);
+        
+        return salida;
+    }
+    
 }
