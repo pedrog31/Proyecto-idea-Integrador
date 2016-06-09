@@ -89,4 +89,22 @@ public class PersonaDao implements InterfacePersonaDao {
         }
         return true;
     }
+
+    @Override
+    public List<Estudiante> getInscritos(Connection c, int radicado) {
+        List<Estudiante> estudiantes = new ArrayList();
+        Estudiante es = null;
+        try {
+            Statement s = c.createStatement();
+            String sql = "select Persona.`idPersona`, Persona.`Nombre`, Persona.`Correo` from `Inscripcion` inner join `Persona_has_Inscripcion` inner join `Persona` on Radicado=Inscripcion_Radicado and `Persona_idPersona`=Persona.`idPersona` where Radicado =" + radicado;
+            ResultSet resPostulante = s.executeQuery(sql);
+            while (resPostulante.next()) {
+                es = new Estudiante(resPostulante.getInt(1), resPostulante.getString(2), resPostulante.getString(3));
+                estudiantes.add(es);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return estudiantes;
+    }
 }

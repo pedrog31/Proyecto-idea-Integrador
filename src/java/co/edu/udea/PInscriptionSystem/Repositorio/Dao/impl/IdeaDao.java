@@ -202,7 +202,7 @@ public class IdeaDao implements InterfaceIdeaDao {
         Persona avalador = d.getAvalador();
         List<Persona> postulante = d.getPostulante();
         String fecha = d.getFecha().toString();
-        List<String> requisitos = d.getRequisitos().getAllCodigosRequisitos();
+        List<Materia> requisitos = d.getRequisitos().getAllRequisitos();
         try {
             dao.conectar();
             Connection conexion = dao.getConexion();
@@ -216,8 +216,8 @@ public class IdeaDao implements InterfaceIdeaDao {
             }
             sql = "INSERT INTO `Idea` (`Identificador`, `titulo`, `Descripcion`, `Fecha_creacion`, `NroEstudiantesxEquipo`, `NroEquipos`, `Persona_avalador_idPersona`)VALUES (" + id + ",\"" + titulo + "\",\"" + descripcion + "\",\"" + fecha + "\"," + estudiantesxEquipo + "," + totalEquipos + "," + avalador.getIdPersona() + ")";
             s.executeUpdate(sql);
-            for (String requisito : requisitos) {
-                sql = "INSERT INTO `Prerequisito` (`Idea_Identificador`, `Codigo_Materia`)VALUES (" + id + "," + requisito + ")";
+            for (Materia prequisito : requisitos) {
+                sql = "INSERT INTO `Prerequisito` (`Idea_Identificador`, `Codigo_Materia`)VALUES (" + id + "," + prequisito.getCodigo() + ")";
                 s.executeUpdate(sql);
             }
         } catch (SQLException ex) {
@@ -225,7 +225,6 @@ public class IdeaDao implements InterfaceIdeaDao {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Override

@@ -93,54 +93,21 @@ public class Requisito {
         this.areas = areas;
     }
 
-    public List<String> getAllCodigosRequisitos() {
-        List<String> codigos = new ArrayList();
-        if (a1 != null) {
-            for (Materia mat : a1) {
-                codigos.add(mat.getCodigo() + "");
-            }
-        }
-        if (a2 != null) {
-            for (Materia mat : a2) {
-                codigos.add(mat.getCodigo() + "");
-            }
-        }
-        if (a3 != null) {
-            for (Materia mat : a3) {
-                codigos.add(mat.getCodigo() + "");
-            }
-        }
-        if (a4 != null) {
-            for (Materia mat : a4) {
-                codigos.add(mat.getCodigo() + "");
-            }
-        }
-        if (a5 != null) {
-            for (Materia mat : a5) {
-                codigos.add(mat.getCodigo() + "");
-            }
-        }
-        if (a6 != null) {
-            for (Materia mat : a6) {
-                codigos.add(mat.getCodigo() + "");
-            }
-        }
-        if (a7 != null) {
-            for (Materia mat : a7) {
-                codigos.add(mat.getCodigo() + "");
-            }
-        }
-        if (a8 != null) {
-            for (Materia mat : a8) {
-                codigos.add(mat.getCodigo() + "");
-            }
-        }
-        return codigos;
+    public List<Materia> getAllRequisitos() {
+        List<Materia> materias = new ArrayList();
+        materias.addAll(a1);
+        materias.addAll(a2);
+        materias.addAll(a3);
+        materias.addAll(a4);
+        materias.addAll(a5);
+        materias.addAll(a6);
+        materias.addAll(a7);
+        materias.addAll(a8);
+        return materias;
     }
 
     public List<List> getListasDeRequisitos() {
         List<List> salida = new ArrayList<List>();
-        
         salida.add(this.a1);
         salida.add(this.a2);
         salida.add(this.a3);
@@ -149,7 +116,6 @@ public class Requisito {
         salida.add(this.a6);
         salida.add(this.a7);
         salida.add(this.a8);
-        
         return salida;
     }
     

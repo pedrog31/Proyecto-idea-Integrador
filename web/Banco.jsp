@@ -45,71 +45,74 @@
         <div class="cabecera"></div>
         <div class="tabla">
             <h2>Proyectos disponibles semestre xxx</h2>
-            <table border="1px solid black;">
-                <thead>
-                    <tr>
-                        <th>Título</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%
-                    InterfaceIdeaDao idao = new IdeaDao();
-                    List<Idea> prueba = idao.getOfertaSemestre("20161");
-                    for(Idea id : prueba){
-                    %>
-                    <tr>
-                        <td>
-                            <button class="accordion"><%out.print(id.getTitulo());%></button>
-                            <div class="panel">
-                                <p>Identificador: <%out.print(id.getIdentificador());%></p>
-                                
-                                <p>Descripción del problema:<br/> 
-                                   <%out.print(id.getDescripcion());%>
-                                </p>
-                                
-                                <p>Número de integrantes: <%out.print(id.getNroEstudiantesxEquipo());%></p>                 
-                                <p>Grupos disponibles: <%out.print(id.getDisponibilidad());%></p>
-                                <p>Postulante: <%out.print(id.getPostulante());%></p>
-                                <p>Profesor que avala: <%out.print(id.getAvalador().getNombre()+"  "+id.getAvalador().getCorreo());%></p>
-                                <p>Requisitos:<br/>
-                                    <%
-                                        Requisito r = id.getRequisitos();
-                                        out.print(r.getA1()+""+r.getA2()+r.getA3()+r.getA4()+r.getA5()+r.getA6()+r.getA7()+r.getA8());%>
-                                </p>   
-                            </div>
-                                    
-                            <!--<button class="accordion">Section 1</button>
-                            <div class="panel">
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            </div>
+                
+            <form method="post" action="MostrarBanco">
+                <table border="1px solid black;">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                        InterfaceIdeaDao idao = new IdeaDao();
+                        List<Idea> prueba = idao.getOfertaSemestre("20161");
+                        for(Idea id : prueba){
+                        %>
+                        <tr>
+                            <td>
+                                <button class="accordion"><%out.print(id.getTitulo());%></button>
+                                <div class="panel">
+                                    <p>Identificador: <%out.print(id.getIdentificador());%></p>
 
-                            <button class="accordion">Section 2</button>
-                            <div class="panel">
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            </div>
+                                    <p>Descripción del problema:<br/> 
+                                       <%out.print(id.getDescripcion());%>
+                                    </p>
 
-                            <button class="accordion">Section 3</button>
-                            <div class="panel">
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            </div>-->
-                                
-                            <script>
-                            var acc = document.getElementsByClassName("accordion");
-                            var i;
+                                    <p>Número de integrantes: <%out.print(id.getNroEstudiantesxEquipo());%></p>                 
+                                    <p>Grupos disponibles: <%out.print(id.getDisponibilidad());%></p>
+                                    <p>Postulante: <%out.print(id.getPostulante());%></p>
+                                    <p>Profesor que avala: <%out.print(id.getAvalador().getNombre()+"  "+id.getAvalador().getCorreo());%></p>
+                                    <p>Requisitos:<br/>
+                                        <%
+                                            Requisito r = id.getRequisitos();
+                                            out.print(r.getA1()+""+r.getA2()+r.getA3()+r.getA4()+r.getA5()+r.getA6()+r.getA7()+r.getA8());%>
+                                    </p>   
+                                </div>
 
-                            for (i = 0; i < acc.length; i++) {
-                                acc[i].onclick = function(){
-                                    this.classList.toggle("active");
-                                    this.nextElementSibling.classList.toggle("show");
+                                <!--<button class="accordion">Section 1</button>
+                                <div class="panel">
+                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                </div>
+
+                                <button class="accordion">Section 2</button>
+                                <div class="panel">
+                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                </div>
+
+                                <button class="accordion">Section 3</button>
+                                <div class="panel">
+                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                </div>-->
+
+                                <script>
+                                var acc = document.getElementsByClassName("accordion");
+                                var i;
+
+                                for (i = 0; i < acc.length; i++) {
+                                    acc[i].onclick = function(){
+                                        this.classList.toggle("active");
+                                        this.nextElementSibling.classList.toggle("show");
+                                    }
                                 }
-                            }
-                            </script>
-                            
-                        </td>
-                    </tr>  
-                    <% }%> 
-                </tbody>
-            </table>
+                                </script>
+
+                            </td>
+                        </tr>  
+                        <% }%> 
+                    </tbody>
+                </table>
+            </form>
             <br/>
             <hr color="black"/>
 

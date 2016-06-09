@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface InterfaceInscritosDao {
     
-    public List<Inscripcion> getAllInscripciones ();
+    public List<Inscripcion> getAllInscripciones (String semestre);
     
-    public Inscripcion getInscripcionByID (int id);
+    public Inscripcion getInscripcionByRadicado (int radicado);
     
     public void generarInscripcion (Inscripcion ins);    
 }
