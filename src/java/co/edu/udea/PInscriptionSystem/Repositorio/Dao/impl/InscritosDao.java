@@ -5,9 +5,16 @@
  */
 package co.edu.udea.PInscriptionSystem.Repositorio.Dao.impl;
 
+import co.edu.udea.PInscriptionSystem.Repositorio.Dao.Dao;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dao.InterfaceInscritosDao;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dto.Inscripcion;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,9 +22,27 @@ import java.util.List;
  */
 public class InscritosDao implements InterfaceInscritosDao {
 
+    private Dao dao;
+
+    public InscritosDao() {
+        this.dao = new Dao();
+    }
+
     @Override
     public List<Inscripcion> getAllInscripciones() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Inscripcion> inscripciones = new ArrayList();
+        Inscripcion i;
+        try {
+            dao.conectar();
+            Connection conexion = dao.getConexion();
+            Statement s = conexion.createStatement();
+            String sql;
+        } catch (SQLException ex) {
+            Logger.getLogger(InscritosDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InscritosDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return inscripciones;
     }
 
     @Override
@@ -29,5 +54,5 @@ public class InscritosDao implements InterfaceInscritosDao {
     public void generarInscripcion(Inscripcion ins) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

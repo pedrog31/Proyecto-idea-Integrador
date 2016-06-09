@@ -21,59 +21,69 @@
     <body>
         <h1>IDEAS DE PROYECTOS</h1>
         <div class="tabla">
-                <table>
+            <table>
+                <tr>
+                    <th>Agregar</th>
+                    <th>ID</th>
+                    <th>Título</th>
+                </tr>
+                <c:forEach var="idea" items="${listaIdeas}">
                     <tr>
-                        <th>Agregar</th>
-                        <th>ID</th>
-                        <th>Título</th>
-                    </tr>
-                    <c:forEach var="idea" items="${listaIdeas}">
-                        <tr>
-                            <td><input type="checkbox" name="add" value="<c:out value="${idea.getIdentificador()}"/>"/></td>
-                            <td>${idea.getIdentificador()}</td> 
-                            <td>
-                                <button class="accordion"><c:out value="${idea.getTitulo()}"/></button>
-                                <div class="panel">
-                                    <p>Identificador: <c:out value="${idea.getIdentificador()}"/></p>
+                        <td><input type="checkbox" name="add" value="<c:out value="${idea.getIdentificador()}"/>"/></td>
+                        <td>${idea.getIdentificador()}</td> 
+                        <td>
+                            <button class="accordion"><c:out value="${idea.getTitulo()}"/></button>
+                            <div class="panel">
+                                <p>Identificador: <c:out value="${idea.getIdentificador()}"/></p>
 
-                                    <p>Descripción del problema:<br/> 
-                                        <c:out value="${idea.getTitulo()}"/>
-                                    </p>
+                                <p>Descripción del problema:<br/> 
+                                    <c:out value="${idea.getTitulo()}"/>
+                                </p>
 
-                                    <p>Número de integrantes: <c:out value="${idea.getNroEstudiantesxEquipo()}"/></p>                 
-                                    <p>Grupos disponibles: <c:out value="${idea.getDisponibilidad()}"/></p>
-                                    <p>Postulante: <c:out value="${idea.getPostulante()}"/></p>
-                                    <p>Profesor que avala: <c:out value="${idea.getAvalador().getNombre()}"/><c:out value="${idea.getAvalador().getCorreo()}"/></p>
-                                    <p>Requisitos:<br/>
-                                        ${idea.getRequisitos().getA1()}
-                                        ${idea.getRequisitos().getA2()}
-                                        ${idea.getRequisitos().getA3()}
-                                        ${idea.getRequisitos().getA4()}
-                                        ${idea.getRequisitos().getA5()}
-                                        ${idea.getRequisitos().getA6()}
-                                        ${idea.getRequisitos().getA7()}
-                                        ${idea.getRequisitos().getA8()}
-                                    </p>   
-                                </div>
-                                <script>
-                                            var acc = document.getElementsByClassName("accordion")
-                                    ;
-                                    var i;
+                                <p>Número de integrantes: <c:out value="${idea.getNroEstudiantesxEquipo()}"/></p>                 
+                                <p>Grupos disponibles: <c:out value="${idea.getDisponibilidad()}"/></p>
+                                <p>Postulante: <c:out value="${idea.getPostulante()}"/></p>
+                                <p>Profesor que avala: <c:out value="${idea.getAvalador().getNombre()}"/><c:out value="${idea.getAvalador().getCorreo()}"/></p>
+                                <p>Requisitos:<br/>
+                                <ul>
+                                    
+                                    <c:forEach var="area" items="${idea.getRequisitos().getAreas()}" varStatus="ite">
+                                        
+                                        <li>
+                                            <c:out value="${area}"/>
 
-                                    for (i = 0; i < acc.length; i++) {
-                                        acc[i].onclick = function () {
-                                            this.classList.toggle("active");
-                                            this.nextElementSibling.classList.toggle("show");
-                                        }
+                                            <ul>
+                                                <c:forEach var="materia" items="${idea.getRequisitos().getListasDeRequisitos().get(ite.count-1)}">
+                                                    <li>
+                                                        <c:out value="${materia.getCodigo()}"/>
+                                                        <c:out value="${materia.getNombre()}"/>
+                                                    </li>
+                                                </c:forEach>
+                                            </ul>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                                </p>   
+                            </div>  
+                            <script>
+                                        var acc = document.getElementsByClassName("accordion")
+                                ;
+                                var i;
+
+                                for (i = 0; i < acc.length; i++) {
+                                    acc[i].onclick = function () {
+                                        this.classList.toggle("active");
+                                        this.nextElementSibling.classList.toggle("show");
                                     }
-                                </script>
+                                }
+                            </script>
 
-                            </td>
-                        </tr> 
-                    </c:forEach>
-                </table>
+                        </td>
+                    </tr> 
+                </c:forEach>
+            </table>
 
-                <a href="/PInscriptionSystems/ofertar">Ofertar Proyectos</a>
+            <a href="ofertar">Ofertar Proyectos</a>
 
 
         </div>

@@ -45,11 +45,12 @@ public class ProyectosAOfertar extends HttpServlet {
                 Idea aux = dao.getIdeaByID(Integer.parseInt(ideas[i]));
                 listaIdeas.add(aux);
             }
-            
+            System.out.println("hola");
             request.setAttribute("listaIdeas", listaIdeas);
         
-            request.getRequestDispatcher("/ofertaConf.jsp").forward(request, response);
+            request.getRequestDispatcher("/ideas.jsp").forward(request, response);
         }
+        request.getRequestDispatcher("/ideas.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

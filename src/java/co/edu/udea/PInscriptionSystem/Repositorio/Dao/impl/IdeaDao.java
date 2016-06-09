@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class IdeaDao implements InterfaceIdeaDao {
 
-    Dao dao;
+    private Dao dao;
 
     public IdeaDao() {
         dao = new Dao();

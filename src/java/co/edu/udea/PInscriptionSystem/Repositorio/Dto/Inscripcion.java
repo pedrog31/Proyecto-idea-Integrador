@@ -13,11 +13,14 @@ import java.util.List;
  */
 public class Inscripcion {
     private List<Estudiante> inscritos;
-    private Idea idea;
+    private int idIdea, radicado,semestre;
+    private String estado;
 
-    public Inscripcion(List<Estudiante> inscritos, Idea idea) {
-        this.inscritos = inscritos;
-        this.idea = idea;
+    public Inscripcion(int idIdea, int radicado, int semestre, String estado) {
+        this.idIdea = idIdea;
+        this.radicado = radicado;
+        this.semestre = semestre;
+        this.estado = estado;
     }
 
     public List<Estudiante> getInscritos() {
@@ -28,12 +31,36 @@ public class Inscripcion {
         this.inscritos = inscritos;
     }
 
-    public Idea getIdea() {
-        return idea;
+    public int getIdIdea() {
+        return idIdea;
     }
 
-    public void setIdea(Idea idea) {
-        this.idea = idea;
+    public void setIdIdea(int idIdea) {
+        this.idIdea = idIdea;
+    }
+
+    public int getRadicado() {
+        return radicado;
+    }
+
+    public void setRadicado(int radicado) {
+        this.radicado = radicado;
+    }
+
+    public int getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(int semestre) {
+        this.semestre = semestre;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
     
