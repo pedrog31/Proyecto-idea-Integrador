@@ -34,6 +34,8 @@ public class Materia {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-
     
+    public boolean equals (Materia p) {
+        return p.getCodigo() == codigo;
+    }
 }

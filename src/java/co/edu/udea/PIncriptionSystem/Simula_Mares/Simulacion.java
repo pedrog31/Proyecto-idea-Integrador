@@ -1,6 +1,7 @@
 package co.edu.udea.PIncriptionSystem.Simula_Mares;
 
 import co.edu.udea.PInscriptionSystem.Repositorio.Dto.Materia;
+import java.util.ArrayList;
 import java.util.List;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,9 +12,9 @@ import java.util.List;
  *
  * @author Mario
  */
-public final class Repositorio {
+public final class Simulacion {
 
-    public Repositorio () {
+    public Simulacion () {
         this.agregarMaterias();
         this.llenarlista();
     }
@@ -57,7 +58,7 @@ public final class Repositorio {
     Estudiante_Mares est9 = new Estudiante_Mares(45, "ana.moreno", "contra9", "1217496824", "Ana Isabel Moreno García");
     Estudiante_Mares est10 = new Estudiante_Mares(130, "esteban.noreña", "contra10", "1223069751", "Esteban Noreña Acosta");
 
-    List<Estudiante_Mares> listaestudiantes;
+    List<Estudiante_Mares> listaestudiantes = new ArrayList();
 
     public void agregarMaterias() {
         est1.setVect(vecmat1);
@@ -85,7 +86,7 @@ public final class Repositorio {
         listaestudiantes.add(est10);
     }
     
-    public List<Estudiante_Mares> getlistaestuduantes() {
+    public List<Estudiante_Mares> getlistaestudiantes() {
         return listaestudiantes;
     }
     

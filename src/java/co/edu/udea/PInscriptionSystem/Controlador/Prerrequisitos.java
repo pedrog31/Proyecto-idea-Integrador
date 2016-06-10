@@ -5,6 +5,7 @@
  */
 package co.edu.udea.PInscriptionSystem.Controlador;
 
+import co.edu.udea.PInscriptionSystem.Dominio.Valida_Requerimiento;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dao.InterfaceIdeaDao;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dao.impl.IdeaDao;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dto.Idea;
@@ -21,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author PedroGallego
  */
-@WebServlet(name = "MostrarBanco", urlPatterns = {"/MostrarBanco"})
-public class MostrarBanco extends HttpServlet {
+@WebServlet(name = "Prerrequisitos", urlPatterns = {"/Prerrequisitos"})
+public class Prerrequisitos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,27 +38,16 @@ public class MostrarBanco extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {
+        //try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet MostrarBanco</title>");            
-            out.println("</head>");
-            out.println("<body>");
             
-            InterfaceIdeaDao dao = new IdeaDao();
-            List<Idea> listaIdeas = dao.getOfertaSemestre(null);
             
-            request.setAttribute("listaIdeas", listaIdeas);
-        
-            request.getRequestDispatcher("/ideas.jsp").forward(request, response);
+            Valida_Requerimiento valre = new Valida_Requerimiento();            
+
             
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
+      /*  } finally {
             out.close();
-        }
+        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

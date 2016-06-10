@@ -16,7 +16,7 @@
                 <br /><br />
                 <h1>Iniciar Sesión</h1>            
                 <br /><br /> 
-                <form method="post" action="proceso-login.jsp">
+                <form method="post" action="Ingreso">
                     <table cellpadding="2" cellspacing="2"> 
                         <tr>
                             <th>Ingrese Usuario:</th>
@@ -24,15 +24,8 @@
                         </tr>
                         <tr>
                             <th>Ingrese cotraseña:</th>
-                            <td><input type="text" placeholder=" contraseña" name = "clave"></td>
+                            <td><input type="password" placeholder=" contraseña" name = "clave"></td>
                         </tr>
-                        <!--Ingrese usuario: 
-                        <input type="text" placeholder="usuario" name="user">
-                        <br /><br />
-                        Ingrese contraseña:
-                        <input type="password" placeholder="contraseña" name="clave">
-                        <br /><br />
-                        <input type="checkbox">Recordar usuario-->
                     </table>    
                     <br />
                     <table>
@@ -55,8 +48,6 @@
                     <input type="checkbox">Recordar usuario
                     <br /><br />
                     <input type="submit" value="Ingresar">
-
-                    <a href="Banco.jsp">Banco de Ideas</a>
 
                 </form>
             </div>

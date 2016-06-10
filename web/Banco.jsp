@@ -42,14 +42,15 @@
             su proceso de aprendizaje.
         </p>
         
-        <div class="cabecera"></div>
+
         <div class="tabla">
             <h2>Proyectos disponibles semestre xxx</h2>
                 
-            <form method="post" action="MostrarBanco">
+            <form method="post" action="SeleccionarIdea">
                 <table border="1px solid black;">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Título</th>
                         </tr>
                     </thead>
@@ -60,8 +61,9 @@
                         for(Idea id : prueba){
                         %>
                         <tr>
+                            <td><input type="radio" name="add" onclick="redireccion()"></td>
                             <td>
-                                <button class="accordion"><%out.print(id.getTitulo());%></button>
+                                <p class="accordion"><%out.print(id.getTitulo());%></p>
                                 <div class="panel">
                                     <p>Identificador: <%out.print(id.getIdentificador());%></p>
 
@@ -79,22 +81,7 @@
                                             out.print(r.getA1()+""+r.getA2()+r.getA3()+r.getA4()+r.getA5()+r.getA6()+r.getA7()+r.getA8());%>
                                     </p>   
                                 </div>
-
-                                <!--<button class="accordion">Section 1</button>
-                                <div class="panel">
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                </div>
-
-                                <button class="accordion">Section 2</button>
-                                <div class="panel">
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                </div>
-
-                                <button class="accordion">Section 3</button>
-                                <div class="panel">
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                </div>-->
-
+                                    
                                 <script>
                                 var acc = document.getElementsByClassName("accordion");
                                 var i;
@@ -112,14 +99,15 @@
                         <% }%> 
                     </tbody>
                 </table>
+                    <a href="login2.jsp">Volver</a>
+                    <input type="submit" value="Inscribir Idea">    
             </form>
             <br/>
             <hr color="black"/>
-
         </div>
         
-        <a href="login2.jsp">Volver</a>
-        <a href="Formulario.jsp">formulario</a>
+        
+
         
     </body>
     

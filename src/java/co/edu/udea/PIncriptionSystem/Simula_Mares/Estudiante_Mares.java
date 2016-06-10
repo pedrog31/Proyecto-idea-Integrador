@@ -2,8 +2,6 @@ package co.edu.udea.PIncriptionSystem.Simula_Mares;
 
 
 import co.edu.udea.PInscriptionSystem.Repositorio.Dto.Materia;
-import java.util.List;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,7 +24,6 @@ public class Estudiante_Mares {
         this.creditos = creditos;
         this.nombre = nombre;
         this.usuario = usuario;
-        this.vect = vect;
     }
 
     /**

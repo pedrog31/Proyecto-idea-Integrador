@@ -5,12 +5,9 @@
  */
 package co.edu.udea.PInscriptionSystem.Controlador;
 
-import co.edu.udea.PInscriptionSystem.Repositorio.Dao.InterfaceIdeaDao;
-import co.edu.udea.PInscriptionSystem.Repositorio.Dao.impl.IdeaDao;
-import co.edu.udea.PInscriptionSystem.Repositorio.Dto.Idea;
+import co.edu.udea.PIncriptionSystem.Simula_Mares.Mares_Facade;
+import co.edu.udea.PIncriptionSystem.Simula_Mares.Interface_Mares_facade;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Dani
+ * @author Pedro Gallego
  */
-@WebServlet(name = "MostrarIdeas", urlPatterns = {"/ideas"})
-public class MostrarIdeas extends HttpServlet {
+@WebServlet(name = "Ingreso", urlPatterns = {"/Ingreso"})
+public class Ingreso extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,13 +32,21 @@ public class MostrarIdeas extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        InterfaceIdeaDao idao = new IdeaDao();
-        List<Idea> listaIdeas = idao.getOfertaSemestre("20161");
-        
-        request.setAttribute("listaIdeas", listaIdeas);
-        
-        request.getRequestDispatcher("/ideas.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+ 
+            Interface_Mares_facade val = new Mares_Facade();
+            String usuario = request.getParameter("user");
+            String contraseña = request.getParameter("clave");
+            boolean validacion = val.ValidarUsuario(usuario, contraseña);
+            if(usuario.isEmpty() || contraseña.isEmpty()){
+                response.sendRedirect("login2.jsp?error=Ingrese datos");
+            }else{
+                if (validacion){
+                    response.sendRedirect("Banco.jsp");
+                }else{
+                    response.sendRedirect("login2.jsp?error=Nombre de usuario o clave incorrecta");
+                }
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

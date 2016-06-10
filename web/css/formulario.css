@@ -5,7 +5,14 @@ h1{
 }
 
 body{
-    background: #5EA7FA;
+    background: rgba(181,207,237,1);
+    background: -moz-linear-gradient(45deg, rgba(181,207,237,1) 0%, rgba(43,141,227,1) 69%, rgba(190,213,238,1) 100%);
+    background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(181,207,237,1)), color-stop(69%, rgba(43,141,227,1)), color-stop(100%, rgba(190,213,238,1)));
+    background: -webkit-linear-gradient(45deg, rgba(181,207,237,1) 0%, rgba(43,141,227,1) 69%, rgba(190,213,238,1) 100%);
+    background: -o-linear-gradient(45deg, rgba(181,207,237,1) 0%, rgba(43,141,227,1) 69%, rgba(190,213,238,1) 100%);
+    background: -ms-linear-gradient(45deg, rgba(181,207,237,1) 0%, rgba(43,141,227,1) 69%, rgba(190,213,238,1) 100%);
+    background: linear-gradient(45deg, rgba(181,207,237,1) 0%, rgba(43,141,227,1) 69%, rgba(190,213,238,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5cfed', endColorstr='#bed5ee', GradientType=1 );
 }
 
 div{
@@ -67,4 +74,26 @@ form{
     bottom:0px;
     left:100px;
     right:0px;
+}
+
+.pingüino{
+    position: absolute;
+    top:150px;
+    bottom:0px;
+    left:650px;
+    right:0px; 
+    background: none;
+}
+
+
+
+.pie{
+    width: auto;
+    height: 80px;
+    position: relative;
+    top:50px;
+    bottom:0px;
+    left:0px;
+    right:0px; 
+
 }

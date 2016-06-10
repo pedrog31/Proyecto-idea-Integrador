@@ -95,14 +95,14 @@ public class Requisito {
 
     public List<Materia> getAllRequisitos() {
         List<Materia> materias = new ArrayList();
-        materias.addAll(a1);
-        materias.addAll(a2);
-        materias.addAll(a3);
-        materias.addAll(a4);
-        materias.addAll(a5);
-        materias.addAll(a6);
-        materias.addAll(a7);
-        materias.addAll(a8);
+        if (a1 != null) materias.addAll(a1);
+        if (a2 != null) materias.addAll(a2);
+        if (a3 != null) materias.addAll(a3);
+        if (a4 != null) materias.addAll(a4);
+        if (a5 != null) materias.addAll(a5);
+        if (a6 != null) materias.addAll(a6);
+        if (a7 != null) materias.addAll(a7);
+        if (a8 != null) materias.addAll(a8);
         return materias;
     }
 

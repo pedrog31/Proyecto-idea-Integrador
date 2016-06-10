@@ -10,11 +10,16 @@
     <body>
         
         <h1>Formulario de Inscripción</h1>
+        
+        <div class="pingüino">
+            <img src="img/tuxito.png" width="500">
+        </div>
         <br/>
         <p>Inicie sesión con los demás integrantes para continuar</p>
+        
 
         <form action="" method="post">
-            <div>
+            <div class="all">
                 <table>
                     <tr>
                         <th>Usuario:</th>
@@ -77,6 +82,7 @@
 
             <input type="submit" value="Enviar inscripción">
             <a href="Banco.jsp">Cambiar selección</a>
-        </form>  
+        </form>
+        <div class="pie"></div>
     </body>
 </html>

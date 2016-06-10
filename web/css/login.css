@@ -74,3 +74,10 @@ input[type="text"] {
     box-sizing:border-box;
     border:2px solid gray;
 }
+
+input[type="password"] {
+    width:100%;
+    padding:5px;
+    box-sizing:border-box;
+    border:2px solid gray;
+}
