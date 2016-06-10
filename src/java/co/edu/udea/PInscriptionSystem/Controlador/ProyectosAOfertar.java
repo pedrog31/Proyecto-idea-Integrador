@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,20 +38,23 @@ public class ProyectosAOfertar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String ideas[] = request.getParameterValues("add");
-        if (ideas != null && ideas.length != 0) {
-            InterfaceIdeaDao dao = new IdeaDao();
-            List<Idea> listaIdeas = new ArrayList<Idea>();
-            for (int i = 0; i < ideas.length; i++) {
-                Idea aux = dao.getIdeaByID(Integer.parseInt(ideas[i]));
-                listaIdeas.add(aux);
-            }
-            System.out.println("hola");
-            request.setAttribute("listaIdeas", listaIdeas);
+        HttpSession session = request.getSession();
         
-            request.getRequestDispatcher("/ideas.jsp").forward(request, response);
+        String idIdeas[] = request.getParameterValues("add");
+        
+        List<Idea> listaIdeas = new ArrayList<Idea>();
+        
+        for (String idIdea : idIdeas) {
+            InterfaceIdeaDao dao = new IdeaDao();
+            Idea aux = dao.getIdeaByID(Integer.parseInt(idIdea));
+            listaIdeas.add(aux);
         }
-        request.getRequestDispatcher("/ideas.jsp").forward(request, response);
+        
+        session.setAttribute("listaDeIdeas", listaIdeas);
+
+        request.setAttribute("listaIdeas", listaIdeas);
+        
+        request.getRequestDispatcher("/ofertaConf.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

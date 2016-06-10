@@ -21,69 +21,70 @@
     <body>
         <h1>IDEAS DE PROYECTOS</h1>
         <div class="tabla">
-            <table>
-                <tr>
-                    <th>Agregar</th>
-                    <th>ID</th>
-                    <th>Título</th>
-                </tr>
-                <c:forEach var="idea" items="${listaIdeas}">
+            <form name="ideasForm" action="ofertar" method="post">
+                <table>
                     <tr>
-                        <td><input type="checkbox" name="add" value="<c:out value="${idea.getIdentificador()}"/>"/></td>
-                        <td>${idea.getIdentificador()}</td> 
-                        <td>
-                            <button class="accordion"><c:out value="${idea.getTitulo()}"/></button>
-                            <div class="panel">
-                                <p>Identificador: <c:out value="${idea.getIdentificador()}"/></p>
+                        <th>Agregar</th>
+                        <th>ID</th>
+                        <th>Título</th>
+                    </tr>
+                    <c:forEach var="idea" items="${listaIdeas}">
+                        <tr>
+                            <td><input type="checkbox" name="add" value="<c:out value="${idea.getIdentificador()}"/>"/></td>
+                            <td>${idea.getIdentificador()}</td> 
+                            <td>
+                                <button type="button" class="accordion"><c:out value="${idea.getTitulo()}"/></button>
+                                <div class="panel">
+                                    <p>Identificador: <c:out value="${idea.getIdentificador()}"/></p>
+<
+                                    <p>Descripción del problema:<br/> 
+                                        <c:out value="${idea.getTitulo()}"/>
+                                    </p>
 
-                                <p>Descripción del problema:<br/> 
-                                    <c:out value="${idea.getTitulo()}"/>
-                                </p>
+                                    <p>Número de integrantes: <c:out value="${idea.getNroEstudiantesxEquipo()}"/></p>                 
+                                    <p>Grupos disponibles: <c:out value="${idea.getDisponibilidad()}"/></p>
+                                    <p>Postulante: <c:out value="${idea.getPostulante()}"/></p>
+                                    <p>Profesor que avala: <c:out value="${idea.getAvalador().getNombre()}"/><c:out value="${idea.getAvalador().getCorreo()}"/></p>
+                                    <p>Requisitos:<br/>
+                                    <ul>
 
-                                <p>Número de integrantes: <c:out value="${idea.getNroEstudiantesxEquipo()}"/></p>                 
-                                <p>Grupos disponibles: <c:out value="${idea.getDisponibilidad()}"/></p>
-                                <p>Postulante: <c:out value="${idea.getPostulante()}"/></p>
-                                <p>Profesor que avala: <c:out value="${idea.getAvalador().getNombre()}"/><c:out value="${idea.getAvalador().getCorreo()}"/></p>
-                                <p>Requisitos:<br/>
-                                <ul>
-                                    
-                                    <c:forEach var="area" items="${idea.getRequisitos().getAreas()}" varStatus="ite">
-                                        
-                                        <li>
-                                            <c:out value="${area}"/>
+                                        <c:forEach var="area" items="${idea.getRequisitos().getAreas()}" varStatus="ite">
 
-                                            <ul>
-                                                <c:forEach var="materia" items="${idea.getRequisitos().getListasDeRequisitos().get(ite.count-1)}">
-                                                    <li>
-                                                        <c:out value="${materia.getCodigo()}"/>
-                                                        <c:out value="${materia.getNombre()}"/>
-                                                    </li>
-                                                </c:forEach>
-                                            </ul>
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-                                </p>   
-                            </div>  
-                            <script>
-                                var acc = document.getElementsByClassName("accordion")
-                                ;
-                                var i;
+                                            <li>
+                                                <c:out value="${area}"/>
 
-                                for (i = 0; i < acc.length; i++) {
-                                    acc[i].onclick = function () {
-                                        this.classList.toggle("active");
-                                        this.nextElementSibling.classList.toggle("show");
+                                                <ul>
+                                                    <c:forEach var="materia" items="${idea.getRequisitos().getListasDeRequisitos().get(ite.count-1)}">
+                                                        <li>
+                                                            <c:out value="${materia.getCodigo()}"/>
+                                                            <c:out value="${materia.getNombre()}"/>
+                                                        </li>
+                                                    </c:forEach>
+                                                </ul>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                    </p>   
+                                </div>  
+                                <script>
+                                            var acc = document.getElementsByClassName("accordion")
+                                    ;
+                                    var i;
+
+                                    for (i = 0; i < acc.length; i++) {
+                                        acc[i].onclick = function () {
+                                            this.classList.toggle("active");
+                                            this.nextElementSibling.classList.toggle("show");
+                                        }
                                     }
-                                }
-                            </script>
+                                </script>
 
-                        </td>
-                    </tr> 
-                </c:forEach>
-            </table>
-
-            <a href="ofertar">Ofertar Proyectos</a>
+                            </td>
+                        </tr> 
+                    </c:forEach>
+                </table>
+            </form>
+            <a href="javascript:document.ideasForm.submit();" class="boton">Ofertar Proyectos</a>
 
 
         </div>

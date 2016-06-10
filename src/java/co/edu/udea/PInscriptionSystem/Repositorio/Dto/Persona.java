@@ -6,13 +6,18 @@
 package co.edu.udea.PInscriptionSystem.Repositorio.Dto;
 
 /**
- *
+ * @version 1.0
  * @author PedroGallego
  */
 public abstract class Persona {
     private int idPersona;
     private String nombre,correo;
-
+    
+    /**
+     * @param idPersona identificacion de la persona puede ser cedula, ti, pasaporte o CE
+     * @param nombre nombre completo de la persona
+     * @param correo correo electronico de la persona
+     */
     public Persona(int idPersona, String nombre, String correo) {
         this.idPersona = idPersona;
         this.nombre = nombre;

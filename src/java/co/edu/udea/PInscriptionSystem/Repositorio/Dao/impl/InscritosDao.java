@@ -109,19 +109,38 @@ public class InscritosDao implements InterfaceInscritosDao {
             Statement s = conexion.createStatement();
             InterfacePersonaDao persona = new PersonaDao();
             sql = "INSERT INTO `Inscripcion` (`Radicado`, `Estado`, `Oferta_semestre_Idea_Identificador`, `Oferta_semestre_Semestre`) VALUES (" + radicado + ",\"" + estado + "\"," + idIdea + "," + semestre + ")";
-            System.out.println(sql);
             s.executeUpdate(sql);
             for (Estudiante e : estudiantes) {
-                persona.guardarNuevaPersona(conexion,e);
-                sql = "INSERT INTO `Persona_has_Inscripcion` (`Persona_idPersona`, `Inscripcion_Radicado`) VALUES ("+e.getIdPersona()+","+radicado+")";
+                persona.guardarNuevaPersona(conexion, e);
+                sql = "INSERT INTO `Persona_has_Inscripcion` (`Persona_idPersona`, `Inscripcion_Radicado`) VALUES (" + e.getIdPersona() + "," + radicado + ")";
                 s.executeUpdate(sql);
             }
+            sql = "update oferta_semestre inner join Inscripcion on `Idea_Identificador`= `Oferta_semestre_Idea_Identificador` and `Semestre` = `Oferta_semestre_Semestre` set Disponibilidad = Disponibilidad -1 where radicado = " + radicado;
+            s.execute(sql);
         } catch (SQLException ex) {
             Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    @Override
+    public int contarRegistros() {
+        String sql = "select count(*) from `Inscripcion`";
+        ResultSet resultado = null;
+        try {
+            dao.conectar();
+            Connection conexion = dao.getConexion();
+            resultado = conexion.createStatement().executeQuery(sql);
+            resultado.next();
+            return resultado.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(InscritosDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InscritosDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 
 }

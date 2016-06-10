@@ -9,7 +9,6 @@ import java.sql.*;
 import java.util.List;
 
 /**
- *
  * @author PedroGallego
  */
 public class Idea {
@@ -21,6 +20,18 @@ public class Idea {
     private Date fecha;
     private Requisito requisitos;
 
+    /**
+     * 
+     * @param identificador identifica unicamende cada idea
+     * @param titulo titulo que el jefe de carrea 
+     * @param descripcion
+     * @param fecha
+     * @param nroEstudiantesxEquipo
+     * @param disponibilidad
+     * @param totalEquipos
+     * @param postulante
+     * @param avalador 
+     */
     public Idea(int identificador, String titulo, String descripcion, Date fecha, int nroEstudiantesxEquipo, int disponibilidad, int totalEquipos, List<Persona> postulante, Persona avalador) {
         this.identificador = identificador;
         this.nroEstudiantesxEquipo = nroEstudiantesxEquipo;

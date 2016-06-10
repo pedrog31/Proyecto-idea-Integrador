@@ -9,9 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Inscripción PI</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>La inscripción ha sido exitosa</h1>
+        <a href="index.jsp">Salir</a>
     </body>
 </html>

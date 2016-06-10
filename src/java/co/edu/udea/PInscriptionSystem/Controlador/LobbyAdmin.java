@@ -5,9 +5,8 @@
  */
 package co.edu.udea.PInscriptionSystem.Controlador;
 
-import co.edu.udea.PIncriptionSystem.Simula_Mares.Mares_Facade;
-import co.edu.udea.PIncriptionSystem.Simula_Mares.Interface_Mares_facade;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Pedro Gallego
+ * @author Dani
  */
-@WebServlet(name = "Ingreso", urlPatterns = {"/Ingreso"})
-public class Ingreso extends HttpServlet {
+@WebServlet(name = "LobbyAdmin", urlPatterns = {"/lobbyAdm"})
+public class LobbyAdmin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,21 +31,8 @@ public class Ingreso extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
- 
-            Interface_Mares_facade val = new Mares_Facade();
-            String usuario = request.getParameter("user");
-            String contraseña = request.getParameter("clave");
-            boolean validacion = val.ValidarUsuario(usuario, contraseña);
-            if(usuario.isEmpty() || contraseña.isEmpty()){
-                response.sendRedirect("index.jsp?error=Ingrese datos");
-            }else{
-                if (validacion){
-                    response.sendRedirect("Banco.jsp");
-                }else{
-                    response.sendRedirect("index.jsp?error=Nombre de usuario o clave incorrecta");
-                }
-            }
+        
+        request.getRequestDispatcher("/semestreInscripciones.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

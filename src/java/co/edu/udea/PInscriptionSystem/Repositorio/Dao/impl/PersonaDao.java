@@ -77,9 +77,9 @@ public class PersonaDao implements InterfacePersonaDao {
             try {
                 idRepresentante = Integer.parseInt(tipo);
                 guardarNuevaPersona(c, ((Juridica) p).getRepresentante());
-                sql = "INSERT INTO `Persona` (`idPersona`, `Nombre`, `Correo`, `Rol`, `Tipo`, `Representante_idPersona`) VALUES (" + id + ",`" + nombre + "`,`" + correo + "`,`" + rol + "`," + "`Juridica`," + idRepresentante + ")";
+                sql = "INSERT INTO `Persona` (`idPersona`, `Nombre`, `Correo`, `Rol`, `Tipo`, `Representante_idPersona`) VALUES (" + id + ",\"" + nombre + "\",\"" + correo + "\",\"" + rol + "\"," + "\"Juridica," + idRepresentante + ")";
             } catch (Exception e) {
-                sql = "INSERT INTO `Persona` (`idPersona`, `Nombre`, `Correo`, `Rol`, `Tipo`, `Representante_idPersona`) VALUES (" + id + ",`" + nombre + "`,`" + correo + "`,`" + rol + "`,`" + tipo + "`,null)";
+                sql = "INSERT INTO `Persona` (`idPersona`, `Nombre`, `Correo`, `Rol`, `Tipo`, `Representante_idPersona`) VALUES (" + id + ",\"" + nombre + "\",\"" + correo + "\",\"" + rol + "\",\"" + tipo + "\",null)";
             } finally {
                 s.executeUpdate(sql);
             }

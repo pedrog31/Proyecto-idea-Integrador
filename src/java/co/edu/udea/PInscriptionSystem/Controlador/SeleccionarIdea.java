@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,25 +36,15 @@ public class SeleccionarIdea extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        //try {
-            /* TODO output your page here. You may use following sample code. */
+      
+
             
-            
-            InterfaceIdeaDao dao = new IdeaDao();
-            List<Idea> listaIdeas = dao.getOfertaSemestre("20161");
-            
+        String cod = request.getParameter("radiob");
         
-            
-            
-            
-            
-            
- 
-      /*  } finally {
-            out.close();
-        }*/
+
+        request.setAttribute("value_radio", cod);
+        request.getRequestDispatcher("/Formulario.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

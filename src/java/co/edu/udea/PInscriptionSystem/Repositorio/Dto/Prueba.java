@@ -11,6 +11,7 @@ import co.edu.udea.PInscriptionSystem.Dominio.Valida_Requerimiento;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dao.*;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dao.impl.IdeaDao;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dao.impl.InscritosDao;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,16 +24,14 @@ import java.util.List;
  */
 public class Prueba {
     public static void main (String [] arg ) throws ParseException {
-        Valida_Requerimiento v = new Valida_Requerimiento();
-        Simulacion r = new Simulacion ();
-        InterfaceIdeaDao i = new IdeaDao();
-        Idea idea = i.getIdeaByID(5);
-        Estudiante_Mares repositorio = r.getlistaestudiantes().get(7);
-        Materia [] matRepo = repositorio.getVect();
-        ArrayList matRepoList = new ArrayList<Materia>(Arrays.asList(matRepo));
-        System.out.println(v.validaCreditos(repositorio));
-        System.out.println(v.validaPrerequisitos(idea.getRequisitos().getAllRequisitos(),matRepoList));
-        
+        InterfaceInscritosDao  in = new InscritosDao();
+        Inscripcion inscripcion = new Inscripcion (5, 1, 20161, "Aprobado");
+        List<Estudiante> estudiantes = new ArrayList();
+        estudiantes.add(new Estudiante(1034, "pedro", "sjjisa"));
+        estudiantes.add(new Estudiante(1035, "pedro", "sjjisa"));
+        estudiantes.add(new Estudiante(1056, "pedro", "sjjisa"));
+        inscripcion.setInscritos(estudiantes);
+        in.generarInscripcion(inscripcion);
     }
     
 }

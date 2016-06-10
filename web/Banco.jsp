@@ -1,4 +1,5 @@
 
+<%@page import="co.edu.udea.PInscriptionSystem.Controlador.SeleccionarIdea"%>
 <%@page import="co.edu.udea.PInscriptionSystem.Repositorio.Dto.Requisito"%>
 <%@page import="co.edu.udea.PInscriptionSystem.Repositorio.Dto.Idea"%>
 <%@page import="co.edu.udea.PInscriptionSystem.Repositorio.Dao.impl.IdeaDao"%>
@@ -10,13 +11,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/banco.css">
-        <title>Proyecto Integrador</title>        
+        <title>Proyecto Integrador</title>    
+        <script language="JavaScript" >
+            function emergente()
+        </script>
     </head>
-    <script language="JavaScript" >
-
-        function emergente()
-        
-    </script>
+    
     <body>
         <h1>PROYECTO INTEGRADOR</h1>
         <p>
@@ -55,13 +55,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%
+                        <%     
+                        SeleccionarIdea selec = new SeleccionarIdea();
                         InterfaceIdeaDao idao = new IdeaDao();
                         List<Idea> prueba = idao.getOfertaSemestre("20161");
                         for(Idea id : prueba){
                         %>
                         <tr>
-                            <td><input type="radio" name="add" onclick="redireccion()"></td>
+                            <td><input type="radio" name="radiob" value="<%out.print(id.getIdentificador());%>"></td>
                             <td>
                                 <p class="accordion"><%out.print(id.getTitulo());%></p>
                                 <div class="panel">
@@ -74,14 +75,13 @@
                                     <p>Número de integrantes: <%out.print(id.getNroEstudiantesxEquipo());%></p>                 
                                     <p>Grupos disponibles: <%out.print(id.getDisponibilidad());%></p>
                                     <p>Postulante: <%out.print(id.getPostulante());%></p>
-                                    <p>Profesor que avala: <%out.print(id.getAvalador().getNombre()+"  "+id.getAvalador().getCorreo());%></p>
+                                    <p>Profesor que avala: <%out.print(id.getAvalador().getNombre()+"   Email:"+id.getAvalador().getCorreo());%></p>
                                     <p>Requisitos:<br/>
                                         <%
                                             Requisito r = id.getRequisitos();
                                             out.print(r.getA1()+""+r.getA2()+r.getA3()+r.getA4()+r.getA5()+r.getA6()+r.getA7()+r.getA8());%>
                                     </p>   
-                                </div>
-                                    
+                                </div>    
                                 <script>
                                 var acc = document.getElementsByClassName("accordion");
                                 var i;
@@ -93,22 +93,16 @@
                                     }
                                 }
                                 </script>
-
                             </td>
                         </tr>  
                         <% }%> 
                     </tbody>
                 </table>
-                    <a href="login2.jsp">Volver</a>
+                    <a href="index.jsp">Volver</a>
                     <input type="submit" value="Inscribir Idea">    
             </form>
             <br/>
             <hr color="black"/>
-        </div>
-        
-        
-
-        
-    </body>
-    
+        </div>   
+    </body>    
 </html>

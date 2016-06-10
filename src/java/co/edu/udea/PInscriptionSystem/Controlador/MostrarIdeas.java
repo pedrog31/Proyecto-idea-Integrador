@@ -36,8 +36,8 @@ public class MostrarIdeas extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        InterfaceIdeaDao idao = new IdeaDao();
-        List<Idea> listaIdeas = idao.getOfertaSemestre("20161");
+        InterfaceIdeaDao dao = new IdeaDao();
+        List<Idea> listaIdeas = dao.getOfertaSemestre(null);
         
         request.setAttribute("listaIdeas", listaIdeas);
         

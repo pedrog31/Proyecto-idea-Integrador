@@ -18,5 +18,7 @@ public interface InterfaceInscritosDao {
     
     public Inscripcion getInscripcionByRadicado (int radicado);
     
-    public void generarInscripcion (Inscripcion ins);    
+    public void generarInscripcion (Inscripcion ins);
+    
+    public int contarRegistros ();
 }

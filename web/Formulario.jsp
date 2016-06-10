@@ -1,4 +1,5 @@
 
+<%@page import="co.edu.udea.PInscriptionSystem.Controlador.Prerrequisitos"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,11 +15,10 @@
         <div class="pingüino">
             <img src="img/tuxito.png" width="500">
         </div>
-        <br/>
-        <p>Inicie sesión con los demás integrantes para continuar</p>
-        
-
-        <form action="" method="post">
+        <br/>      
+        <p>Inscripción para Idea: <% out.print(request.getAttribute("value_radio")); %></p>
+        <p>Inicie sesión con todos los integrantes para continuar</p> 
+        <form action="Prerrequisitos" method="post">
             <div class="all">
                 <table>
                     <tr>
@@ -29,14 +29,6 @@
                         <th>Contraseña:</th>
                         <td><input type="password" name="c1"></td>
                     </tr>            
-                    <tr>
-                        <th>Nombre:</th>
-                        <td><input type="text" name="n1"></td>
-                    </tr>
-                    <tr>
-                        <th>Cédula:</th>
-                        <td><input type="text" name="d1"></td>
-                    </tr>
                 </table>
             </div>
             <div>
@@ -49,14 +41,6 @@
                         <th>Contraseña:</th>
                         <td><input type="password" name="c2"></td>
                     </tr>            
-                    <tr>
-                        <th>Nombre:</th>
-                        <td><input type="text" name="n2"></td>
-                    </tr>
-                    <tr>
-                        <th>Cédula:</th>
-                        <td><input type="text" name="d2"></td>
-                    </tr>
                 </table>
             </div>
             <div>
@@ -69,17 +53,8 @@
                         <th>Contraseña:</th>
                         <td><input type="password" name="c3"></td>
                     </tr>            
-                    <tr>
-                        <th>Nombre:</th>
-                        <td><input type="text" name="n3"></td>
-                    </tr>
-                    <tr>
-                        <th>Cédula:</th>
-                        <td><input type="text" name="d3"></td>
-                    </tr>
                 </table>
             </div>
-
             <input type="submit" value="Enviar inscripción">
             <a href="Banco.jsp">Cambiar selección</a>
         </form>
