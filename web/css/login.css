@@ -52,6 +52,11 @@ input[type="submit"]{
     height: 30px;
     box-shadow: 1px 2px 0px #064FA4;
     margin: 10px 50px;
+    position: relative;
+    top:0px;
+    bottom:0px;
+    left:20px;
+    right:0px;
 }
 input[type="submit"]:hover{
     background:#619BDE;

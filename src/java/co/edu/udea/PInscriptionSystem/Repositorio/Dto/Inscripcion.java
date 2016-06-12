@@ -5,6 +5,7 @@
  */
 package co.edu.udea.PInscriptionSystem.Repositorio.Dto;
 
+import co.edu.udea.PIncriptionSystem.Simula_Mares.Estudiante_Mares;
 import java.util.List;
 
 /**

@@ -16,7 +16,6 @@
             <img src="img/tuxito.png" width="500">
         </div>
         <br/>      
-        <p>Inscripción para Idea: <% out.print(request.getAttribute("value_radio")); %></p>
         <p>Inicie sesión con todos los integrantes para continuar</p> 
         <form action="Prerrequisitos" method="post">
             <div class="all">

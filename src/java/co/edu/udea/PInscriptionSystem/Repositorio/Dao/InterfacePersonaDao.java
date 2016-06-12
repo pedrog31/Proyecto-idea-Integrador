@@ -5,6 +5,7 @@
  */
 package co.edu.udea.PInscriptionSystem.Repositorio.Dao;
 
+import co.edu.udea.PIncriptionSystem.Simula_Mares.Estudiante_Mares;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dto.Estudiante;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dto.Persona;
 import java.sql.Connection;
@@ -23,5 +24,7 @@ public interface InterfacePersonaDao {
     public List<Estudiante> getInscritos (Connection c, int radicado);
 
     public Persona getAvalador(Connection c, int idavalador);
+    
+    //public List<Estudiante_Mares> getInscritosMares(Connection c, int radicado);
 
 }

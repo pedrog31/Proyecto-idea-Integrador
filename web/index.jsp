@@ -50,10 +50,8 @@
                         </tr>
                     </table>
                     <br/>
-                    <input type="checkbox">Recordar usuario
                     <br /><br />
                     <input type="submit" value="Ingresar">
-
                 </form>
             </div>  
         </section>  

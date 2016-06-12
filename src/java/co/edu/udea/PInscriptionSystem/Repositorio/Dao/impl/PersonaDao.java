@@ -5,6 +5,7 @@
  */
 package co.edu.udea.PInscriptionSystem.Repositorio.Dao.impl;
 
+import co.edu.udea.PIncriptionSystem.Simula_Mares.Estudiante_Mares;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dao.InterfacePersonaDao;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dto.Estudiante;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dto.Juridica;
@@ -107,4 +108,21 @@ public class PersonaDao implements InterfacePersonaDao {
         }
         return estudiantes;
     }
+    /*@Override
+    public List<Estudiante_Mares> getInscritosMares(Connection c, int radicado) {
+        List<Estudiante_Mares> estudiantes = new ArrayList();
+        Estudiante es = null;
+        try {
+            Statement s = c.createStatement();
+            String sql = "select Persona.`idPersona`, Persona.`Nombre`, Persona.`Correo` from `Inscripcion` inner join `Persona_has_Inscripcion` inner join `Persona` on Radicado=Inscripcion_Radicado and `Persona_idPersona`=Persona.`idPersona` where Radicado =" + radicado;
+            ResultSet resPostulante = s.executeQuery(sql);
+            while (resPostulante.next()) {
+                es = new Estudiante_Mares (resPostulante.getInt(1), resPostulante.getString(2), resPostulante.getString(3));
+                estudiantes.add(es);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(IdeaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return estudiantes;
+    }*/
 }

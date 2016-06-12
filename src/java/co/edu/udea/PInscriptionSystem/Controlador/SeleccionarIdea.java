@@ -41,8 +41,7 @@ public class SeleccionarIdea extends HttpServlet {
             
         String cod = request.getParameter("radiob");
         
-
-        request.setAttribute("value_radio", cod);
+        request.getSession().setAttribute("value_radio", cod);
         request.getRequestDispatcher("/Formulario.jsp").forward(request, response);
 
     }

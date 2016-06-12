@@ -37,15 +37,15 @@ public final class Simulacion {
     private final Materia mat16 = new Materia("FUND SIST DE INFORMACION", 2508633);
 
     private final Materia[] vecmat1 = {mat1, mat9, mat16, mat4, mat6, mat12};
-    private final Materia[] vecmat2 = {mat5, mat2, mat4, mat11, mat14, mat7, mat3};
+    private final Materia[] vecmat2 = {mat5, mat2, mat4, mat11, mat14, mat7, mat3,mat9};
     private final Materia[] vecmat3 = {mat9, mat1, mat5, mat14, mat8};
     private final Materia[] vecmat4 = {mat13, mat15, mat12, mat4};
-    private final Materia[] vecmat5 = {mat6, mat9, mat1, mat9, mat15, mat2, mat13};
+    private final Materia[] vecmat5 = {mat6, mat1, mat9, mat15, mat2, mat13};
     private final Materia[] vecmat6 = {mat1, mat2, mat8, mat4};
     private final Materia[] vecmat7 = {mat6, mat5, mat4, mat9, mat14};
     private final Materia[] vecmat8 = {mat8, mat6, mat4};
     private final Materia[] vecmat9 = {mat16, mat3, mat9, mat7, mat14};
-    private final Materia[] vecmat10 = {mat5, mat1, mat4};
+    private final Materia[] vecmat10 = {mat5, mat1, mat4,mat9};
 
     Estudiante_Mares est1 = new Estudiante_Mares(120, "mateo.gomez", "contra1", "1026542158", "Mateo Gómez Acosta");
     Estudiante_Mares est2 = new Estudiante_Mares(122, "jorge.robledo", "contra2", "1015953204", "Jorge Antonia Robledo Mesa");

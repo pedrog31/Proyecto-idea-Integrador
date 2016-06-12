@@ -43,10 +43,10 @@ public class Mares_Facade implements Interface_Mares_facade {
     }
 
     @Override
-    public Estudiante_Mares getEstudiante(String id) {
+    public Estudiante_Mares getEstudiante(String usuario) {
         List <Estudiante_Mares> estudiantes = repositorio.getlistaestudiantes();
         for (Estudiante_Mares estudiante:estudiantes) {
-            if (estudiante.getCedula().equals(id)) return estudiante;
+            if (estudiante.getUsuario().equals(usuario)) return estudiante;
         }
         return null;
     }

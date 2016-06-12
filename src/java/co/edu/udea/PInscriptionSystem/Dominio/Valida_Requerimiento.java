@@ -32,7 +32,6 @@ public class Valida_Requerimiento {
         }
         return true;
     }
-    
     public boolean validaCreditos (Estudiante_Mares e) {
         int creditos = e.getCreditos();
         return creditos > 100;

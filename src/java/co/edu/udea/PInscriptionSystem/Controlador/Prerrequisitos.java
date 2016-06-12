@@ -12,12 +12,14 @@ import co.edu.udea.PInscriptionSystem.Dominio.Valida_Requerimiento;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dao.InterfaceIdeaDao;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dao.impl.IdeaDao;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dao.impl.InscritosDao;
+import co.edu.udea.PInscriptionSystem.Repositorio.Dto.Estudiante;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dto.Idea;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dto.Inscripcion;
 import co.edu.udea.PInscriptionSystem.Repositorio.Dto.Materia;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,8 +51,11 @@ public class Prerrequisitos extends HttpServlet {
             Valida_Requerimiento valre1 = new Valida_Requerimiento();
             Valida_Requerimiento valre2 = new Valida_Requerimiento();
             Valida_Requerimiento valre3 = new Valida_Requerimiento();
-            int codigo = (Integer)request.getAttribute("value_radio");
-            int semestre = (Integer)request.getSession().getAttribute("semestre");
+            /*Object c = request.getAttribute("value_radio");
+            String x = c.toString();*/
+            
+            int codigo = Integer.parseInt((String)request.getSession().getAttribute("value_radio"));//Integer.parseInt(x);
+            int semestre = Integer.parseInt((String)request.getSession().getAttribute("semestre"));
   
             IdeaDao idao = new IdeaDao();
             
@@ -63,25 +68,34 @@ public class Prerrequisitos extends HttpServlet {
             String usuario3 = request.getParameter("u3");
             String clave3 = request.getParameter("c3");
             
-            Inscripcion ins = new Inscripcion(codigo, 1, semestre, "aprovada");
             InscritosDao inscri = new InscritosDao();
-            Interface_Mares_facade val1 = new Mares_Facade();
-            Interface_Mares_facade val2 = new Mares_Facade();
-            Interface_Mares_facade val3 = new Mares_Facade();
-            boolean validacion1 = val1.ValidarUsuario(usuario1, clave1);
-            boolean validacion2 = val2.ValidarUsuario(usuario2, clave2);
-            boolean validacion3 = val3.ValidarUsuario(usuario3, clave3);
-            Estudiante_Mares estu1 = val1.getEstudiante(usuario1);
-            Estudiante_Mares estu2 = val1.getEstudiante(usuario2);
-            Estudiante_Mares estu3 = val1.getEstudiante(usuario3);
+            Inscripcion ins = new Inscripcion(codigo, inscri.contarRegistros()+1, semestre, "aprobada");
+            
+           
+            Interface_Mares_facade val = new Mares_Facade();
+            
+            boolean validacion1 = val.ValidarUsuario(usuario1, clave1);
+            boolean validacion2 = val.ValidarUsuario(usuario2, clave2);
+            boolean validacion3 = val.ValidarUsuario(usuario3, clave3);
+            
+            
+            Estudiante_Mares estu1 = val.getEstudiante(usuario1);
+            Estudiante_Mares estu2 = val.getEstudiante(usuario2);
+            Estudiante_Mares estu3 = val.getEstudiante(usuario3);
+            
+            List<Estudiante> lista = new ArrayList<Estudiante>();
+            lista.add(new Estudiante(Integer.parseInt(estu1.getCedula()),estu1.getNombre(),""));
+            lista.add(new Estudiante(Integer.parseInt(estu2.getCedula()),estu2.getNombre(),""));
+            lista.add(new Estudiante(Integer.parseInt(estu3.getCedula()),estu3.getNombre(),""));
+            ins.setInscritos(lista);
             
             boolean valcred1 = valre1.validaCreditos(estu1);
-            boolean valcred2 = valre2.validaCreditos(estu1);
-            boolean valcred3 = valre3.validaCreditos(estu1);
+            boolean valcred2 = valre2.validaCreditos(estu2);
+            boolean valcred3 = valre3.validaCreditos(estu3);
             
-            List<Materia> histo1 = val1.getHistoria(usuario1);
-            List<Materia> histo2 = val1.getHistoria(usuario2);
-            List<Materia> histo3 = val1.getHistoria(usuario3);
+            List<Materia> histo1 = val.getHistoria(usuario1);
+            List<Materia> histo2 = val.getHistoria(usuario2);
+            List<Materia> histo3 = val.getHistoria(usuario3);
             
             boolean valpre1 = valre1.validaPrerequisitos(idea.getRequisitos().getAllRequisitos(), histo1);
             boolean valpre2 = valre2.validaPrerequisitos(idea.getRequisitos().getAllRequisitos(), histo2);
